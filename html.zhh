@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ريحانة - متجر الورود الفاخرة</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/rtl.css">
+    <!-- روابط الخطوط -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- شريط اختيار اللغة -->
+    <div class="language-switcher">
+        <a href="index.html" class="active">العربية</a>
+        <a href="en/index.html">English</a>
+    </div>
+
+    <!-- محتوى الموقع بالعربية -->
+    <header>
+        <h1>مرحباً بكم في ريحانة</h1>
+        <nav>
+            <ul>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">المنتجات</a></li>
+                <li><a href="#">اتصل بنا</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- باقي المحتوى -->
+</body>
+</html>
+/* المتغيرات العامة */
+:root {
+    --primary-color: #e83e8c;
+    --secondary-color: #000000;
+    --light-color: #ffffff;
+    --text-color: #333333;
+}
+
+/* التنسيقات المشتركة */
+body {
+    font-family: 'Tajawal', 'Poppins', sans-serif;
+    color: var(--text-color);
+    background-color: var(--light-color);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.language-switcher {
+    text-align: center;
+    padding: 10px;
+    background-color: var(--secondary-color);
+}
+
+.language-switcher a {
+    color: var(--light-color);
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.language-switcher a.active {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* تنسيقات أخرى مشتركة */
+/* تنسيقات خاصة باللغة العربية */
+body[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+body[dir="rtl"] .navbar ul,
+body[dir="rtl"] .products-grid,
+body[dir="rtl"] .contact-form {
+    direction: rtl;
+}
+
+body[dir="rtl"] input,
+body[dir="rtl"] textarea,
+body[dir="rtl"] select {
+    text-align: right;
+}
+
+body[dir="rtl"] .float-left {
+    float: right !important;
+}
+
+body[dir="rtl"] .float-right {
+    float: left !important;
+}
+
+/* إضافة أي تنسيقات أخرى خاصة بالعربية */
+// دالة لتحويل التاريخ إلى الهجري (اختياري)
+function convertToHijri(date) {
+    if (document.documentElement.lang === 'ar') {
+        // كود التحويل إلى التاريخ الهجري
+        return hijriDate;
+    }
+    return date;
+}
+
+// دالة لتبديل اللغة
+document.addEventListener('DOMContentLoaded', function() {
+    // حفظ تفضيلات اللغة
+    if (localStorage.getItem('language')) {
+        const lang = localStorage.getItem('language');
+        if (lang === 'en' && !window.location.pathname.includes('/en/')) {
+            window.location.href = 'en/index.html';
+        }
+    }
+
+    // أحداث أزرار تبديل اللغة
+    document.querySelectorAll('.language-switcher a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const lang = this.getAttribute('href').includes('en') ? 'en' : 'ar';
+            localStorage.setItem('language', lang);
+        });
+    });
+});
